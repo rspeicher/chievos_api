@@ -11,11 +11,16 @@ gem 'haml'
 gem 'ohm-contrib', :require => "ohm/contrib"
 gem 'ohm', :require => "ohm"
 gem 'json'
+gem 'httparty', '~> 0.7'
+gem 'nokogiri', '1.4.4'
 
 # Test requirements
-gem 'mocha', :group => "test"
-gem 'rspec', :group => "test"
-gem 'rack-test', :require => "rack/test", :group => "test"
+group :test do
+  gem 'fakeweb', '~> 1.3'
+  gem 'mocha'
+  gem 'rspec'
+  gem 'rack-test', :require => "rack/test"
+end
 
 # Padrino
 gem 'padrino', "0.9.23"
