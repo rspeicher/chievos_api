@@ -2,7 +2,7 @@ class ChievosApi < Padrino::Application
   register Padrino::Mailer
   register Padrino::Helpers
   register CompassInitializer
-
+  register CrawlerConfig
 
   ##
   # Application configuration options
