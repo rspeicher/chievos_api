@@ -1,1 +1,2 @@
 config/crawler.yml
+spec/fixtures/**
