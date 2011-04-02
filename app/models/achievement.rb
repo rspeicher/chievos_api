@@ -5,8 +5,8 @@ class Achievement < Ohm::Model
   attribute :name
   attribute :secret
   attribute :value
-  attribute :global_id
   attribute :tile_path
+  attribute :global_id
   reference :game, Game
 
   index :global_id
