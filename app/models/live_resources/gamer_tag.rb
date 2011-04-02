@@ -27,7 +27,7 @@ class GamerTag < LiveResource
       game = Game.new
 
       # Extract name from h3
-      game.name = div.css('div.TitleInfo h3').first.text
+      game.name = div.css('div.TitleInfo h3').first.text.strip
 
       # Extract guid from game link
       game.guid = div.css('div.TitleInfo a').first['href'].gsub(/.*\/([^\/]+)$/, '\1')
@@ -65,13 +65,13 @@ class GamerTag < LiveResource
       ach.site_id = div.css('div.AchievementInfo').first['id'].gsub(/^ach-(\d+)$/, '\1')
 
       # Extract name from h3
-      ach.name = div.css('div.AchievementInfo h3').first.text
+      ach.name = div.css('div.AchievementInfo h3').first.text.strip
 
       # Determine secret from title
       ach.secret = ach.name == "Secret Achievement"
 
       # Extract value from GamerScore div
-      ach.value = div.css('div.GamerScore').first.text
+      ach.value = div.css('div.GamerScore').first.text.strip
 
       # Extract tile_path from image
       if ach.secret
@@ -97,7 +97,7 @@ class GamerTag < LiveResource
 
   # Fetches the response body for this tag's achievements for a specific game
   def fetch_achievements(title_id)
-    response = self.class.get('/en-US/Achievements', :query => {:titleId => title_id, :compareTo => @tag})
+    response = self.class.get('/en-US/GameCenter/Achievements', :query => {:titleId => title_id, :compareTo => @tag})
 
     response.body
   end

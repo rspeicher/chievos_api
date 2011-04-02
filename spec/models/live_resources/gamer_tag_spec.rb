@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GamerTag, "#games" do
   before do
-    FakeWeb.register_uri(:get, /GameCenter.+saigoh/, :body => fixture('xbox_live/games_saigoh.html'))
+    FakeWeb.register_uri(:get, /GameCenter\?compareTo=saigoh/, :body => fixture('xbox_live/games_saigoh.html'))
     @resource = GamerTag.new('saigoh')
     @games    = @resource.games
   end
@@ -25,7 +25,7 @@ end
 describe GamerTag, "#achievements" do
   before do
     title_id = 1480657498 # Super Meat Boy
-    FakeWeb.register_uri(:get, /Achievements.+titleId=#{title_id}/, :body => fixture("xbox_live/achievements_saigoh_#{title_id}.html"))
+    FakeWeb.register_uri(:get, /Achievements\?.+titleId=#{title_id}/, :body => fixture("xbox_live/achievements_saigoh_#{title_id}.html"))
     @resource     = GamerTag.new('saigoh')
     @achievements = @resource.achievements(title_id)
   end
