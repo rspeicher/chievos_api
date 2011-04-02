@@ -5,19 +5,19 @@ class Achievement < Ohm::Model
   attribute :name
   attribute :secret
   attribute :value
-  attribute :uuid
-  # TODO: Icon path
+  attribute :global_id
+  attribute :tile_path
   reference :game, Game
 
-  index :uuid
+  index :global_id
 
-  before :validate, :set_uuid
+  before :validate, :set_global_id
 
   class << self
-    # Returns a string suitable for use as a <tt>uuid</tt>
+    # Returns a string suitable for use as a <tt>global_id</tt>
     # for an <tt>Achievement</tt>.
-    def create_uuid(game_guid, site_id)
-      "#{game_guid}::#{site_id}"
+    def global_id(title_id, site_id)
+      "#{title_id}-#{site_id}"
     end
   end
 
@@ -29,9 +29,9 @@ class Achievement < Ohm::Model
   protected
 
   # Microsoft was not kind enough to give us a true UUID, so we're going to
-  # fake one by combining this record's Game's UUID with the <tt>site_id</tt>
-  def set_uuid
-    self.uuid = Achievement.create_uuid(self.game.guid, self.site_id)
+  # fake one by combining this record's Game's <tt>title_id</tt> with our <tt>site_id</tt>
+  def set_global_id
+    self.global_id = Achievement.global_id(self.game.title_id, self.site_id)
   end
 
   def validate
@@ -43,8 +43,8 @@ class Achievement < Ohm::Model
     assert_present :name
     assert_present :secret
     assert_present :value
-    assert_present :uuid
+    assert_present :global_id
 
-    assert_unique :uuid
+    assert_unique :global_id
   end
 end
