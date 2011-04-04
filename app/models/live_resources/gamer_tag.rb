@@ -90,15 +90,11 @@ class GamerTag < LiveResource
 
   # Fetches the response body for this tag's played games page
   def fetch_games
-    response = self.class.get('/en-US/GameCenter', :query => {:compareTo => @tag})
-
-    response.body
+    self.class.get('/en-US/GameCenter', :query => {:compareTo => @tag}).body
   end
 
   # Fetches the response body for this tag's achievements for a specific game
   def fetch_achievements(title_id)
-    response = self.class.get('/en-US/GameCenter/Achievements', :query => {:titleId => title_id, :compareTo => @tag})
-
-    response.body
+    self.class.get('/en-US/GameCenter/Achievements', :query => {:titleId => title_id, :compareTo => @tag}).body
   end
 end

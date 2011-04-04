@@ -31,7 +31,7 @@ class Achievement < Ohm::Model
   # Microsoft was not kind enough to give us a true UUID, so we're going to
   # fake one by combining this record's Game's <tt>title_id</tt> with our <tt>site_id</tt>
   def set_global_id
-    self.global_id = Achievement.global_id(self.game.title_id, self.site_id)
+    self.global_id = self.class.global_id(self.game.title_id, self.site_id)
   end
 
   def validate
