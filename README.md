@@ -1,4 +1,4 @@
-# Chievos API
+# Chievos API ![](http://stillmaintained.com/tsigo/chievos_api.png)
 
 Abandoned project. I was aiming to provide a nice JSON API to Xbox.com
 achievement data. I lost interest because secret achievements suck.
